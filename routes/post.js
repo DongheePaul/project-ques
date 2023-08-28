@@ -22,6 +22,7 @@ router.get('/search_title', async function (req, res, next) {
         const query = 'SELECT * FROM post WHERE title LIKE ?';
         const params = [`%${searchKeyword}%`];
         const searchResults = await database.execute(query, params);
+        res.render('post_search_list', { posts: searchResults }); 
     } catch (error) {
         console.error("Error searching posts:", error);
         next(error);
