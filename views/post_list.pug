@@ -18,3 +18,8 @@ html
             td= post.title
             td= post.content
             td= new Date(post.created_at).toLocaleString('ko-KR')
+
+    form(action="/post/search_title" method="get")
+      label(for="keyword") 제목 검색:
+      input(type="text" name="keyword")
+      button(type="submit") 검색

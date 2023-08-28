@@ -15,11 +15,18 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+//게시글 제목 검색
+router.get('/search_title', async function (req, res, next) {
+    console.log(req.query);
+    
+})
+
 //게시글 작성 페이지 렌더.
 router.get('/write', function (req, res, next) {
     res.render('post_write');
 });
 
+//게시글 작성 요청
 router.post('/write', async function (req, res, next) {
     const title = req.body.title;
     const content = req.body.content;
