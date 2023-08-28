@@ -43,6 +43,18 @@ router.get('/search_content', async function (req, res, next) {
     }
 })
 
+//게시글 기간 검색
+router.get('/search_time', async function (req, res, next) {
+    const startDate = req.query.start_date;
+    const endDate = req.query.end_date;
+    const startTime = req.query.start_time;
+    const endTime = req.query.end_time
+    console.log(startTime);
+    console.log(endTime);
+    console.log(startDate);
+    console.log(endDate);
+})
+
 //게시글 작성 페이지 렌더.
 router.get('/write', function (req, res, next) {
     res.render('post_write');

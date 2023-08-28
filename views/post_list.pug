@@ -28,3 +28,14 @@ html
       label(for="keyword") 내용 검색:
       input(type="text" name="keyword")
       button(type="submit") 검색
+
+    form(action="/post/search_time" method="get")
+      label(for="start_date") 시작날짜
+      input(type="date" name="start_date")
+      label(for="start_time") 시작시간
+      input(type="time" name="start_time")
+      label(for="end_date") 종료날짜
+      input(type="date" name="end_date")
+      label(for="end_time") 종료시간
+      input(type="time" name="end_time")
+      button(type="submit") 검색
