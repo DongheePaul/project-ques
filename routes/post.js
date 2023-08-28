@@ -45,14 +45,16 @@ router.get('/search_content', async function (req, res, next) {
 
 //게시글 기간 검색
 router.get('/search_time', async function (req, res, next) {
-    const startDate = req.query.start_date;
-    const endDate = req.query.end_date;
-    const startTime = req.query.start_time;
-    const endTime = req.query.end_time
-    console.log(startTime);
-    console.log(endTime);
-    console.log(startDate);
-    console.log(endDate);
+    const { start_date, end_date, start_time, end_time } = req.query;
+    try {
+        const query = 'SELECT * FROM post WHERE created_at between ? and ?';
+        const params = [`${start_date} ${start_time}`, `${end_date} ${end_time}`];
+        const searchResults = await database.execute(query, params);
+        res.render('post_search_list', { posts: searchResults }); 
+    } catch (error) {
+        console.error("Error searching posts using time period:", error);
+        next(error);
+    }
 })
 
 //게시글 작성 페이지 렌더.
