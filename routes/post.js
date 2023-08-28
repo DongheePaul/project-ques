@@ -32,7 +32,15 @@ router.get('/search_title', async function (req, res, next) {
 //게시글 내용 검색
 router.get('/search_content', async function (req, res, next) {
     const searchKeyword = req.query.keyword; 
-    console.log(searchKeyword);
+    try {
+        const query = 'SELECT * FROM post WHERE content LIKE ?';
+        const params = [`%${searchKeyword}%`];
+        const searchResults = await database.execute(query, params);
+        res.render('post_search_list', { posts: searchResults }); 
+    } catch (error) {
+        console.error("Error searching posts:", error);
+        next(error);
+    }
 })
 
 //게시글 작성 페이지 렌더.
