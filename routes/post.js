@@ -17,8 +17,15 @@ router.get('/', async function (req, res, next) {
 
 //게시글 제목 검색
 router.get('/search_title', async function (req, res, next) {
-    console.log(req.query);
-    
+    const searchKeyword = req.query.keyword; 
+    try {
+        const query = 'SELECT * FROM post WHERE title LIKE ?';
+        const params = [`%${searchKeyword}%`];
+        const searchResults = await database.execute(query, params);
+    } catch (error) {
+        console.error("Error searching posts:", error);
+        next(error);
+    }
 })
 
 //게시글 작성 페이지 렌더.
