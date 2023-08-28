@@ -3,9 +3,16 @@ const express = require('express');
 const router = express.Router();
 const database = require('../model/database');
 
-//게시글 목록
+// 게시글 목록
 router.get('/', async function (req, res, next) {
-    res.render('post_list'); 
+    try {
+        const query = 'SELECT * FROM post';
+        const posts = await database.execute(query);
+        res.render('post_list', { posts: posts }); 
+    } catch (error) {
+        console.error("loading posts error : ", error);
+        next(error);    
+    }
 });
 
 //게시글 작성 페이지 렌더.
