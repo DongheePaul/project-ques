@@ -17,9 +17,9 @@ const getConnection = () => {
     });
 };
 
-const query = (con, sql) => {
+const query = (con, sql, params) => {
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, results) => {
+        con.query(sql, params, (err, results) => {
             if (err) {
                 reject(err);
             } else {
@@ -29,12 +29,10 @@ const query = (con, sql) => {
     });
 };
 
-const execute = async (sql) => {
-    let con;
-
+const execute = async (sql, params) => {
     try {
-        con = await getConnection();
-        const results = await query(con, sql);
+        const con = await getConnection();
+        const results = await query(con, sql, params);
         con.release();
         return results;
     } catch (err) {
