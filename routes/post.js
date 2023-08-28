@@ -87,4 +87,17 @@ router.get('/:post_id', async function (req, res, next) {
     }
 })
 
+router.delete('/:post_id', async function (req, res, next) {
+    try {
+        const { post_id } = req.params;
+        const sql = `DELETE FROM post WHERE id = ?`;
+        const params = [post_id];
+        await database.execute(sql, params);
+        res.json({message : "Post deletion successful"});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error occurred while deleting the post' });
+    }
+})
+
 module.exports = router;
