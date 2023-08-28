@@ -23,3 +23,8 @@ html
       label(for="keyword") 제목 검색:
       input(type="text" name="keyword")
       button(type="submit") 검색
+
+    form(action="/post/search_content" method="get")
+      label(for="keyword") 내용 검색:
+      input(type="text" name="keyword")
+      button(type="submit") 검색

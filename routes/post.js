@@ -29,6 +29,12 @@ router.get('/search_title', async function (req, res, next) {
     }
 })
 
+//게시글 내용 검색
+router.get('/search_content', async function (req, res, next) {
+    const searchKeyword = req.query.keyword; 
+    console.log(searchKeyword);
+})
+
 //게시글 작성 페이지 렌더.
 router.get('/write', function (req, res, next) {
     res.render('post_write');
