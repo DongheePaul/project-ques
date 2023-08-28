@@ -45,4 +45,18 @@ router.post('/write', async function (req, res, next) {
     res.redirect('/');
 });
 
+//게시글 단일 조회 API
+router.get('/:post_id', async function (req, res, next) {
+    const { post_id } = req.params;
+    try {
+        const sql = 'SELECT * FROM post WHERE id = ?';
+        const params = [post_id];
+        const result = await database.execute(sql, params);
+        res.json(result);
+    } catch (error) {
+        console.error("Error while single post searching:", error);
+        next(error);
+    }
+})
+
 module.exports = router;
