@@ -3,6 +3,11 @@ const express = require('express');
 const router = express.Router();
 const database = require('../model/database');
 
+//게시글 목록
+router.get('/', async function (req, res, next) {
+    res.render('post_list'); 
+});
+
 //게시글 작성 페이지 렌더.
 router.get('/write', function (req, res, next) {
     res.render('post_write');
